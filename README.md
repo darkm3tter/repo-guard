@@ -9,9 +9,9 @@ Diferente de los proxies MCP que gatean **por nombre de herramienta**: repo-guar
 ## Instalación
 
 ```bash
-npm install -g repo-guard        # CLI + hook
+npm install -g @darkm3tter/repo-guard   # CLI + hook
 # o local:
-npm install --save-dev repo-guard
+npm install --save-dev @darkm3tter/repo-guard
 ```
 
 ## Uso rápido (CLI)

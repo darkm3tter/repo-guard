@@ -1,5 +1,5 @@
 {
-  "name": "repo-guard",
+  "name": "@darkm3tter/repo-guard",
   "version": "0.1.0",
   "description": "Executable policy engine for coding agents: gate what touches your repo (paths, contents, commands), not just tool names. MCP server + CLI + hooks.",
   "type": "module",

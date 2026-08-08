@@ -11,9 +11,9 @@ Unlike MCP proxies that gate **by tool name**, repo-guard inspects **what touche
 ## Install
 
 ```bash
-npm install -g repo-guard        # CLI + hook
+npm install -g @darkm3tter/repo-guard   # CLI + hook
 # or local:
-npm install --save-dev repo-guard
+npm install --save-dev @darkm3tter/repo-guard
 ```
 
 ## Quick start (CLI)
