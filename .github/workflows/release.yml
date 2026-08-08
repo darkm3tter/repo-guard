@@ -1,0 +1,54 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+      - run: bun install --frozen-lockfile
+      - run: bun run typecheck
+      - run: bun test
+
+  publish:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+      - run: bun install --frozen-lockfile
+      - run: bun run build
+        if: hashFiles('scripts/build.ts') != ''
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  release:
+    needs: publish
+    runs-on: ubuntu-latest
+    env:
+      REPO_NAME: repo-guard
+      PKG_NAME: "@darkm3tter/repo-guard"
+      PKG_DESC: "Firewall de políticas ejecutables para agentes de código — rutas, contenidos y comandos (MCP + CLI + hooks)"
+      DEVTO_TAGS: "security,mcp,cli,agents"
+      DEV_API_KEY: ${{ secrets.DEV_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: oven-sh/setup-bun@v2
+      - run: bun scripts/announce.ts
+      - run: gh release create "$GITHUB_REF_NAME" --title "v${GITHUB_REF_NAME#v}" --notes-file body.md
+        env:
+          GH_TOKEN: ${{ github.token }}
