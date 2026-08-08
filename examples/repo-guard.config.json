@@ -1,0 +1,10 @@
+{
+  "mode": "enforce",
+  "defaultAction": "allow",
+  "rules": [
+    { "id": "no-touch-secrets", "kind": "protect", "path": "**/.env*", "message": "secretos" },
+    { "id": "no-logs-prod", "kind": "block", "path": "src/**", "pattern": "console\\.log", "message": "sin console.log" },
+    { "id": "confirm-migrations", "kind": "require-confirm", "path": "prisma/migrations/**" },
+    { "id": "no-force-push", "kind": "block", "command": "git push.*--force" }
+  ]
+}

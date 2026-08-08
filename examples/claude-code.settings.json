@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit|Bash|Delete",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node node_modules/repo-guard/dist/hook.js"
+          }
+        ]
+      }
+    ]
+  }
+}
