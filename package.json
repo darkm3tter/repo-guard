@@ -1,6 +1,6 @@
 {
   "name": "@darkm3tter/repo-guard",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Executable policy engine for coding agents: gate what touches your repo (paths, contents, commands), not just tool names. MCP server + CLI + hooks.",
   "type": "module",
   "module": "src/index.ts",
@@ -47,3 +47,4 @@
     "typescript": "^7.0.2"
   }
 }
+
